@@ -44,6 +44,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/placement
 })
 .then(() => console.log('MongoDB connected successfully'))
 .catch(err => console.error('MongoDB connection error:', err));
+.catch(err => {
+  console.error('MongoDB connection error:', err.message);
+  console.log('Application will continue without database connection');
+  console.log('To fix this, either:');
+  console.log('1. Start a local MongoDB instance, or');
+  console.log('2. Set MONGODB_URI in .env to a cloud MongoDB connection string');
+});
 
 // Socket.io connection handling
 io.on('connection', (socket) => {
